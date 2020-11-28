@@ -5,31 +5,34 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    name: 'Uma Victor',
-    sizeOfFont: 10,
-    Likes: [
-      { id: 1, Anime: 'Demon Slayer', watched: true },
-      { id: 2, Anime: 'Death Note', watched: false },
-      { id: 3, Anime: 'My Hero Academia', watched: false }
-    ]
-  },
-  getters: {
-    unwatchedAnime: (state) => {
-      return state.Likes.filter(anime => !anime.watched)
-    },
-    doneAnime: (state, getters) => {
-      return getters.unwatchedAnime.length
-    }
+    Loading: null,
+    posts: []
   },
   mutations: {
-    INCREASE_COUNT: state => {
-      state.sizeOfFont += 3
+    LOAD_POST: (state, data) => {
+      state.posts = data
+      console.log('post recieved')
     },
-    DECREASE_COUNT: state => {
-      state.sizeOfFont -= 3
+    startLoading (state) {
+      console.log('started loading')
+      state.Loading = true
+    },
+    stopLoading (state) {
+      console.log('stopped loading')
+      state.Loading = false
     }
   },
   actions: {
+    SET_STATUS: ({ commit }, state) => {
+      commit('startLoading')
+      fetch('https://jsonplaceholder.typicode.com/posts')
+        .then(response => response.json())
+        .then(data => {
+          console.log(data)
+          commit('LOAD_POST', data)
+          commit('stopLoading')
+        })
+    }
   },
   modules: {
   }
