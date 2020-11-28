@@ -5,32 +5,28 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    Loading: null,
+    Loading: false,
     posts: []
   },
   mutations: {
     LOAD_POST: (state, data) => {
       state.posts = data
-      console.log('post recieved')
     },
-    startLoading (state) {
-      console.log('started loading')
+    START_LOADING (state) {
       state.Loading = true
     },
-    stopLoading (state) {
-      console.log('stopped loading')
+    STOP_LOADING (state) {
       state.Loading = false
     }
   },
   actions: {
-    SET_STATUS: ({ commit }, state) => {
-      commit('startLoading')
+    SET_STATUS: ({ commit }) => {
+      commit('START_LOADING')
       fetch('https://jsonplaceholder.typicode.com/posts')
         .then(response => response.json())
         .then(data => {
-          console.log(data)
           commit('LOAD_POST', data)
-          commit('stopLoading')
+          commit('STOP_LOADING')
         })
     }
   },
