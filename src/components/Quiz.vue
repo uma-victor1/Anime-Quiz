@@ -2,18 +2,7 @@
   <div>
     <div class="container">
       <h1 v-if="loading">Loading...</h1>
-      <div>
-        <form>
-            <label for="difficulty">select difficulty:</label>
-            <select v-model="difficulty" name="difficulty" id="difficulty">
-              <option value="easy">easy</option>
-              <option value="medium">medium</option>
-              <option value="hard">hard</option>
-            </select>
-            <br><br>
-            <button @click.prevent="setDifficulty()">Start Quiz</button>
-        </form>
-      </div>
+      <Select/>
       <div v-if="Question.length">
         <h1><span>Question: {{current + 1}} </span></h1>
         <h2>{{ Question[current].question | replace | apostroph }}</h2>
@@ -35,12 +24,12 @@
 </template>
 
 <script>
+import Select from '@/components/Select.vue'
 import { mapState, mapActions, mapGetters } from 'vuex'
 export default {
-  data () {
-    return {
-      difficulty: ''
-    }
+
+  components: {
+    Select
   },
   methods: {
     ...mapActions(['next', 'selectedAnswer', 'submit']),
@@ -54,9 +43,6 @@ export default {
         answerClass = 'incorrectanswer'
       }
       return answerClass
-    },
-    setDifficulty () {
-      this.$store.dispatch('setDifficulty', this.difficulty)
     }
   },
   computed: {
@@ -77,9 +63,6 @@ export default {
         this.$store.commit('RESET')
         this.$store.commit('SHUFFLE_ANSWER')
       }
-    },
-    difficulty () {
-      this.$store.commit('RESETQUIZ')
     }
   }
 }
