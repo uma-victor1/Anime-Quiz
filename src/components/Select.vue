@@ -30,11 +30,6 @@ export default {
     setDifficulty () {
       this.$store.dispatch('setDifficulty', this.difficulty)
     }
-  },
-  watch: {
-    difficulty () {
-      this.$store.commit('RESETQUIZ')
-    }
   }
 }
 </script>

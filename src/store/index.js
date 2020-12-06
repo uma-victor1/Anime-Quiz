@@ -83,6 +83,7 @@ export default new Vuex.Store({
           commit('SET_QUESTION', data.results)
           commit('STOP_LOADING')
           commit('SHUFFLE_ANSWER')
+          commit('RESETQUIZ')
         })
         .catch(error => console.log(error))
     }
