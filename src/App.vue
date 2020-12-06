@@ -1,17 +1,20 @@
 <template>
   <div id="app">
     <Header/>
+    <Select/>
     <Quiz/>
   </div>
 </template>
 
 <script>
 import Header from '@/components/Header.vue'
+import Select from '@/components/Select.vue'
 import Quiz from '@/components/Quiz.vue'
 export default {
   name: 'App',
   components: {
     Header,
+    Select,
     Quiz
   }
 }

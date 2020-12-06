@@ -2,7 +2,6 @@
   <div>
     <div class="container">
       <h1 v-if="loading">Loading...</h1>
-      <Select/>
       <div v-if="Question.length">
         <h1><span>Question: {{current + 1}} </span></h1>
         <h2>{{ Question[current].question | replace | apostroph }}</h2>
@@ -24,13 +23,8 @@
 </template>
 
 <script>
-import Select from '@/components/Select.vue'
 import { mapState, mapActions, mapGetters } from 'vuex'
 export default {
-
-  components: {
-    Select
-  },
   methods: {
     ...mapActions(['next', 'selectedAnswer', 'submit']),
     checkAnswerClass (index) {
