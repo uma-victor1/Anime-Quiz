@@ -13,7 +13,7 @@ export default new Vuex.Store({
     correctIndex: null,
     correctAnswers: 0,
     answered: false,
-    difficulty: null
+    difficultyLevel: null
   },
   mutations: {
     START_LOADING (state) {
@@ -53,7 +53,7 @@ export default new Vuex.Store({
       state.correctAnswers = 0
     },
     SET_DIFFICULTY (state, difficulty) {
-      state.difficulty = difficulty
+      state.difficultyLevel = difficulty
     }
   },
   actions: {
@@ -76,23 +76,15 @@ export default new Vuex.Store({
     setDifficulty: ({ commit, state }, difficulty) => {
       commit('SET_DIFFICULTY', difficulty)
       commit('START_LOADING')
-      fetch(`https://opentdb.com/api.php?amount=10&category=31&difficulty=${state.difficulty}&type=multiple`)
+      fetch(`https://opentdb.com/api.php?amount=10&category=31&difficulty=${state.difficultyLevel}&type=multiple`)
         .then(response => response.json())
         .then(data => {
-          console.log(data)
           commit('SET_QUESTION', data.results)
           commit('STOP_LOADING')
           commit('SHUFFLE_ANSWER')
           commit('RESETQUIZ')
         })
         .catch(error => console.log(error))
-    }
-  },
-  getters: {
-    allOptions: state => {
-      var Options
-      Options = _.concat(state.Question[state.current].incorrect_answers, state.Question[state.current].correct_answer)
-      return Options
     }
   },
   modules: {
