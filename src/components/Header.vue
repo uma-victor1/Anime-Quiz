@@ -3,7 +3,7 @@
     <header>
       <h1>Anime Quiz</h1>
       <div>
-      <button @click="resetQuiz">Reset</button>
+        <button @click="$store.commit('RESETQUIZ')">Reset</button>
       </div>
     </header>
   </div>
@@ -12,9 +12,7 @@
 <script>
 import { mapActions } from 'vuex'
 export default {
-  methods: {
-    ...mapActions(['resetQuiz'])
-  }
+  name: 'Header'
 }
 </script>
 

@@ -73,7 +73,7 @@ export default new Vuex.Store({
     resetQuiz: ({ commit }) => {
       commit('RESETQUIZ')
     },
-    setDifficulty: ({ commit, state }, difficulty) => {
+    beginQuiz: ({ commit, state }, difficulty) => {
       commit('SET_DIFFICULTY', difficulty)
       commit('START_LOADING')
       fetch(`https://opentdb.com/api.php?amount=10&category=31&difficulty=${state.difficultyLevel}&type=multiple`)

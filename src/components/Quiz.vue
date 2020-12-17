@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapGetters } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 export default {
   methods: {
     ...mapActions(['next', 'selectedAnswer', 'submit']),
@@ -40,8 +40,7 @@ export default {
     }
   },
   computed: {
-    ...mapState(['loading', 'Question', 'current', 'selectedIndex', 'shuffledAnswers', 'correctIndex', 'answered', 'correctAnswers']),
-    ...mapGetters(['allOptions'])
+    ...mapState(['loading', 'Question', 'current', 'selectedIndex', 'shuffledAnswers', 'correctIndex', 'answered', 'correctAnswers'])
   },
   filters: {
     replace: function (value) {

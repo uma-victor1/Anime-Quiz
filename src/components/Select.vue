@@ -9,7 +9,7 @@
           <option value="hard">hard</option>
         </select>
         <br /><br />
-        <button @click.prevent="setDifficulty()">Start Quiz</button>
+        <button @click.prevent="startQuiz()">Start Quiz</button>
       </form>
     </div>
   </div>
@@ -23,8 +23,8 @@ export default {
     }
   },
   methods: {
-    setDifficulty () {
-      this.$store.dispatch('setDifficulty', this.difficulty)
+    startQuiz () {
+      this.$store.dispatch('beginQuiz', this.difficulty)
     }
   }
 }
